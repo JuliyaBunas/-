@@ -1,0 +1,41 @@
+import java.util.Random;
+import java.util.Scanner;
+
+/*  Сортировка массива алгоритмом Шелла
+ */
+
+public class new3 {
+
+    public static void main(String[] args) {
+        Random rnd = new Random();
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Введите размер массива: n = ");
+        int n = scan.nextInt();
+        int b = 0;
+        int step = n / 2;
+        int[] arr = new int[n];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = rnd.nextInt(50) + 1;
+            System.out.print(arr[i] + " ");
+        }
+        while (b == 0) {
+            b = 1;
+            for (int i = 0; i < arr.length - step; i++) {
+                if (step < 1) {
+                    step = 1;
+                }
+                if (arr[i] > arr[i + step]) {
+                    arr[i + step] = arr[i + step] + arr[i];
+                    arr[i] = arr[i + step] - arr[i];
+                    arr[i + step] = arr[i + step] - arr[i];
+                    b = 0;
+                }
+            }
+            step = step / 2;
+        }
+        System.out.println();
+        for (int var : arr) {
+            System.out.print(var + " ");
+        }
+    }
+}
