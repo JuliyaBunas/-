@@ -1,0 +1,95 @@
+import java.util.Random;
+import java.util.Scanner;
+
+/*  Сортировка массива алгоритмом слияния
+ */
+
+public class new3 {
+
+    public static void main(String[] args) {
+        Random rnd = new Random();
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Введите размер массива: n = ");
+        int n = scan.nextInt();
+        int b = 0, d = 0;
+
+        int[] arr1 = new int[n];
+        for (int i = 0; i < arr1.length; i++) {
+            arr1[i] = rnd.nextInt(100) + 1;
+            System.out.print(arr1[i] + " ");
+        }
+        
+        //сортируем 1ый массив
+        
+        while (b == 0) {
+            b = 1;
+            for (int k = 0; k < arr1.length - 1; k++) {
+                if (arr1[k] > arr1[k + 1]) {
+                    arr1[k + 1] = arr1[k + 1] + arr1[k];
+                    arr1[k] = arr1[k + 1] - arr1[k];
+                    arr1[k + 1] = arr1[k + 1] - arr1[k];
+                    b = 0;
+                }
+            }
+        }
+        b = 0;
+        System.out.println();
+        int[] arr2 = new int[n];
+        for (int i = 0; i < arr2.length; i++) {
+            arr2[i] = rnd.nextInt(100) + 1;
+            System.out.print(arr2[i] + " ");
+        }
+        
+        //Сортируем 2ой массив
+        
+        while (b == 0) {
+            b = 1;
+            for (int k = 0; k < arr2.length - 1; k++) {
+                if (arr2[k] > arr2[k + 1]) {
+                    arr2[k + 1] = arr2[k + 1] + arr2[k];
+                    arr2[k] = arr2[k + 1] - arr2[k];
+                    arr2[k + 1] = arr2[k + 1] - arr2[k];
+                    b = 0;
+                }
+            }
+        }
+        System.out.println();
+        for (int var : arr1) {
+            System.out.print(var + " ");
+        }
+        System.out.println();
+        for (int var2 : arr2) {
+            System.out.print(var2 + " ");
+        }
+        
+        // Сортируем слиянием
+        
+        int[] arr3 = new int[n * 2];
+        for (int i = 0, k = 0, c = 0; i < arr3.length; i++) {
+            if (k >= arr1.length) {
+                for (int t = i; t < arr3.length; t++){
+                    arr3[t]=arr2[c];
+                    c++;
+                }
+                break;
+            } else if (c >= arr2.length) {
+                for (int t=i; t < arr3.length; t++){
+                    arr3[t]=arr1[k];
+                    k++;
+                }
+                break;
+            }
+            if (arr1[k] < arr2[c]) {
+                arr3[i] = arr1[k];
+                k++;
+            } else if (arr1[k] >= arr2[c]) {
+                arr3[i] = arr2[c];
+                c++;
+            }
+        }
+        System.out.println();
+        for (int var3 : arr3) {
+            System.out.print(var3 + " ");
+        }
+    }
+}
